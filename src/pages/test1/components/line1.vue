@@ -53,7 +53,7 @@ const COLLEGE_OPTIONS = [
 ]
 
 // const state = []
-const mark = ""
+// const mark = ""
 
 export default {
     props:[
