@@ -1,5 +1,5 @@
 <template>
-    <t-space direction="vertical" size="32px" v-if="this.$props.myProps.rowkey===100">
+    <t-space direction="vertical" size="32px">
         <t-form
             :data="formData"
             labelWidth="calc(2em + 128px)"
@@ -57,7 +57,7 @@ const mark = ""
 
 export default {
     props:[
-        'myProps'
+        'list'
     ],
     data() {
         return {
@@ -75,9 +75,9 @@ export default {
             this.$message.success("重置成功")
         },
         onSubmit({ validateResult, firstError }) {
-            const { state, mark } = this
+            const { $props:{list}, mark } = this
             if (validateResult === true) {
-                const result = state.filter((i) => i.id === mark)
+                const result = list.filter((i) => i.id === mark)
                 if (result.length){
                     console.log(result)
                     const {name,type,government,id,address} = result[0]

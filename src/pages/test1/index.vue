@@ -2,7 +2,7 @@
     <div class="tdesign-demo-block-column tdesign-demo__table" style="width: 100%">
         <!-- :expanded-row-keys="expandedRowKeys" 通过keys指定默认会展开的行-->
         <t-table
-            :row-key="myProps.rowkey"
+            :row-key="data.id"
             :columns="columns"
             :data="data"
             :expanded-row="expandedRow"
@@ -40,7 +40,7 @@ const data = [
         instance: "附送资料"
     }
 ]
-const rowkey = data.id
+// const list = []
 
 export default {
     data() {
@@ -50,12 +50,9 @@ export default {
             fixedColumns: false,
             emptyData: false,
             data,
-            myProps: {
-                list: [],
-                rowkey
-            },
+            list:[],
             dataLoading: false,
-            expandedRow: (h, { row }) => <Line1 myProps={this.myProps} />
+            expandedRow: (h, { row }) => (row.id === 100 ? <Line1 list={this.list} /> : "")
         }
     },
     computed: {
@@ -70,8 +67,8 @@ export default {
             .then((res) => {
                 if (res.code === 0) {
                     const { list = [] } = res.data
-                    this.myProps.list = list
-                    console.log("succeed", this.myProps)
+                    console.log("succeed", list)
+                    this.list = list
                 }
             })
             .catch((e) => {
